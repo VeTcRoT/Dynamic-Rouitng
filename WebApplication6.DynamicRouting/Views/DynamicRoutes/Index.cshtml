@@ -1,0 +1,31 @@
+﻿@model FolderViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<h3>"Folder" - @Model.FolderName</h3>
+<hr/>
+<br/>
+
+@if (!string.IsNullOrEmpty(Model.ParentPath) && !Model.ParentPath.Equals("/"))
+{
+    <a href="@Model.ParentPath">Back</a>
+    <br/>
+}
+
+@if (Model.Children.Any())
+{
+    <p>Children:</p>
+    <ul>
+        @foreach (var child in Model.Children)
+        {
+            <li><a href="@child.Url">@child.Name</a></li>
+        }
+    </ul>
+}
+else
+{
+    <p style="margin-top: 10px;">No children - this is a terminal folder</p>
+}
+
